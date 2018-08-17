@@ -564,7 +564,7 @@ Bus 001 Device 003: ID <emphasis role="bold">0557:2221</emphasis> ATEN Internati
        If you are running SELinux on your VM Host Server, you need to disable it
        prior to starting the VM Guest with
       </para>
-<screen><prompt>tux &gt; </prompt></screen><command>setsebool -P virt_use_sysfs 1</command></screen>
+<screen><prompt>tux &gt; </prompt><command>setsebool -P virt_use_sysfs 1</command></screen>
      </tip>
     </step>
    </procedure>
