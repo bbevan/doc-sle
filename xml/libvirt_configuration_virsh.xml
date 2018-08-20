@@ -84,10 +84,9 @@
 <title>Changing the Machine Type</title>
 
 <para>
-  By default, when installing with the <command>virt-install</command> tool, the machine type for VM Guest is
-  <emphasis>pc-i440fx</emphasis>. The machine type is stored in the
-  VM Guest's XML configuration file in
-  <filename>/etc/libvirt/qemu/</filename> in the tag <tag>type</tag>:
+  When installing with the <command>virt-install</command> tool, the machine type for a VM guest is
+  <emphasis>pc-i440fx</emphasis> by default. The machine type is stored in the
+  VM Guest's XML configuration file in the element<tag>type</tag>:
 </para>
 
 <screen>&lt;type arch='x86_64' machine='pc-i440fx-2.3'&gt;hvm&lt;/type&gt;</screen>
@@ -95,18 +94,18 @@
 <para>
   As an example, the following procedure shows how to change this value to the
   machine type <literal>q35</literal>. The value <literal>q35</literal> is an Intel*
-  chipset. It includes <xref linkend="gloss.vt.acronym.pcie"/>, supports up to
+  chipset and includes <xref linkend="gloss.vt.acronym.pcie"/>, supports up to
   12 USB ports, and has support for
   <xref linkend="gloss.vt.acronym.sata"/> and
-  <xref linkend="gloss.vt.acronym.iommu"/>. IRQ routing has also
-  been improved.
+  <xref linkend="gloss.vt.acronym.iommu"/>. <!-- IRQ routing has also
+  been improved. -->
 </para>
 
 <procedure>
   <title>Changing Machine Type</title>
   <step>
   <para>
-    Check whether your VM Guest is inactive:
+    Check whether your VM guest is inactive:
   </para>
 <screen><prompt>tux &gt; </prompt><command>sudo virsh list --inactive</command>
 Id    Name                           State
@@ -115,15 +114,13 @@ Id    Name                           State
   </step>
   <step>
   <para>
-    Edit the configuration for this VM Guest:
+    Edit the configuration for this VM guest:
   </para>
 <screen><prompt>tux &gt; </prompt><command>sudo virsh edit sles15</command></screen>
   </step>
   <step>
   <para>
-    Change the value of the
-    <tag class="attribute">machine</tag>
-    attribute:
+    Replace the value of the <tag class="attribute">machine</tag> attribute with <tag class="attvalue">pc-q35-2.0</tag>:
   </para>
 <screen>&lt;type arch='x86_64' machine='pc-q35-2.0'&gt;hvm&lt;/type&gt;</screen>
   </step>
@@ -135,8 +132,8 @@ Id    Name                           State
   </step>
   <step>
   <para>
-    Check that the machine type has changed. Log in to the VM Guest as
-    root and run the following command:
+    Check that the machine type has changed. Log in to the VM guest 
+    and run the following command:
   </para>
 <screen><prompt>tux &gt; </prompt><command>sudo dmidecode | grep Product</command>
 Product Name: Standard PC (Q35 + ICH9, 2009)</screen>
