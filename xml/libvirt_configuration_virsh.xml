@@ -9,12 +9,11 @@
  <info>
   <abstract>
    <para>
-    In addition to the Virtual Machine Manager, the VM Guest can also be configured with <command>virsh</command>.
+    In addition to the Virtual Machine Manager, the VM guest can also be configured with <command>virsh</command>.
     <command>virsh</command> is a command line tool to manage virtual machines based on virtualization infrastructures such as
     KVM, Xen, VMware, or LXC.
     <command>virsh</command> can control the state of a VM, edit a the configuration of a VM or even migrate a VM to another host.
-    In the following sections the configuration of a VM with <command>virsh</command> will be shown.
-    For example CPU, Memory, Input devices or Video devices.
+    The following section shows you the configuration of a VM with <command>virsh</command>, for example CPU, Memory, Input devices or Video devices.
    </para>
   </abstract>
   <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
@@ -25,9 +24,10 @@
  <sect1 xml:id="sec.libvirt.config.editing.virsh">
   <title>Editing VM Configuration</title>
     <para>
-    The configuration of a VM is stored in a XML file in <filename>/etc/libvirtd/qemu/</filename>.
-    It usually looks like this:
+    The configuration of a VM is stored in a XML file in <filename>/etc/libvirtd/qemu/</filename> and looks like this:
     </para>
+    <example>
+      <title>Example XML Configuration file</title>
     <screen>
     &lt;domain type='kvm'&gt;
       &lt;name&gt;sles15&lt;/name&gt;
@@ -57,19 +57,20 @@
       ...
     &lt;/domain&gt;
     </screen>
+    </example>
     <para>
-    You can edit this XML configuration of the VM Guest with
+    You can edit this XML configuration of the VM guest with:
     </para>
-<screen><prompt>tux &gt; </prompt><command>sudo virsh edit [name of VM Guest]</command>
+<screen><prompt>tux &gt; </prompt><command>sudo virsh edit <replaceable>NAME_OF_VM_GUEST</replaceable></command>
     </screen>
     <tip>
       <para>
-      You can only edit the configuration of a VM Guest while it's offline.
+      Only edit the configuration of a VM guest while it is offline.
       You can ensure this by doing:
       </para>
-      <screen><command>virsh list -\-inactive</command></screen>
+      <screen><command>virsh list --inactive</command></screen>
       <para>
-      If the VM Guest is in this list, the configuration can be edited.
+      If your VM guest is in this list, the configuration can be edited.
       </para>
     </tip>
     <para>
