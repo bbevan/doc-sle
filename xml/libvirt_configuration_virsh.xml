@@ -1170,7 +1170,7 @@ pci_0000_04_11_5</screen>
   <sect1 xml:id="libvirt.video_virsh">
     <title>Configuring Video devices</title>
     <para>
-    When using the <command>Virtual Machine Manager</command>,
+    When using the Virtual Machine Manager,
     only the Video device model can be defined. The amount of allocated VRAM
     or 2D/3D acceleration can only be changed in the XML configuration.
     </para>
@@ -1194,7 +1194,7 @@ pci_0000_04_11_5</screen>
       <step>
       <para>
       Check if the amount of VRAM in the VM has changed by looking at
-      the amount in the <command>Virtual Machine Manager</command>.
+      the amount in the Virtual Machine Manager.
       </para>
       </step>
       </procedure>
@@ -1222,7 +1222,7 @@ pci_0000_04_11_5</screen>
       <tip>
         <title>Note on enabling 2D/3D acceleration</title>
         <para>
-        Please note that only 'vbox' video devices are capable of 2D/3D acceleration.
+        Only 'vbox' video devices are capable of 2D/3D acceleration.
         You cannot enable it on other video devices.
         </para>
       </tip>
