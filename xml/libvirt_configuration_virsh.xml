@@ -330,7 +330,7 @@ CPU Affinity:   yy
   <title>Configuring Memory Allocation</title>
   <para>
   The amount of memory allocated for the VM Guest can also be configured with virsh.
-  It's stored in the <tag>memory</tag> element tag and can be changed by doing the following steps:
+  It's stored in the <tag>memory</tag> element. Follow these steps:
   </para>
   <procedure>
     <step>
@@ -341,7 +341,7 @@ CPU Affinity:   yy
       </step>
       <step>
         <para>
-        Look for the <tag>memory</tag> and set the amount of allocated RAM:
+        Search for the <tag>memory</tag> element and set the amount of allocated RAM:
         </para>
         <screen>
 ...
@@ -352,8 +352,8 @@ CPU Affinity:   yy
       <step>
         <para>
         Check the amount of allocated RAM in your VM by running:
-        <command>cat /proc/meminfo</command>
         </para>
+        <screen><command>cat /proc/meminfo</command></screen>
       </step> 
   </procedure>
 </sect1>
@@ -458,17 +458,18 @@ CPU Affinity:   yy
        <systemitem>libvirt</systemitem> recognizes two modes for handling
        PCI devices: they can be either <literal>managed</literal> or
        <literal>unmanaged</literal>. In the managed case,
-       <systemitem>libvirt</systemitem> will handle all details of
+       <systemitem>libvirt</systemitem> handles all details of
        unbinding the device from the existing driver if needed, resetting
        the device, binding it to <systemitem>vfio-pci</systemitem> before
        starting the domain, etc. When the domain is terminated or the device
-       is removed from the domain, <systemitem>libvirt</systemitem> will
-       unbind from <systemitem>vfio-pci</systemitem> and rebind to the
+       is removed from the domain, <systemitem>libvirt</systemitem> unbinds
+       from <systemitem>vfio-pci</systemitem> and rebinds to the
        original driver in the case of a managed device. If the device is
        unmanaged, the user must ensure all of these management
        aspects of the device are done before assigning it to a domain, and
        after the device is no longer used by the domain.
       </para>
+    </tip>
       <para>
        In the example above, the <literal>managed='yes'</literal> option
        means that the device is managed. To switch the device mode to
@@ -482,21 +483,17 @@ CPU Affinity:   yy
        the host by running <command>virsh nodedev-reattach
        pci_0000_03_07_0</command>.
       </para>
-     </tip>
     </step>
     <step>
      <para>
-      Shut down the VM Guest and restart it to make the assigned PCI device
+      Shut down the VM Guest and disable SELinux if it is running on the host.
       available.
      </para>
-     <tip>
-      <title>SELinux</title>
-      <para>
-       If you are running SELinux on your VM Host Server, you need to disable it
-       prior to starting the VM Guest with
-      </para>
-<screen><command>setsebool -P virt_use_sysfs 1</command></screen>
-     </tip>
+     <screen><command>setsebool -P virt_use_sysfs 1</command></screen>
+    </step>
+    <step>
+      <para>Start your VM Guest to make the assigned PCI device available</para>
+      <screen><command>virsh start sles15</command></screen>
     </step>
    </procedure>
   </sect1>
@@ -536,24 +533,21 @@ Bus 001 Device 003: ID <emphasis role="bold">0557:2221</emphasis> ATEN Internati
      <tip>
       <title>Vendor/Product or Device's Address</title>
       <para>
-       Instead of defining the host device with &lt;vendor/&gt; and &lt;product/&gt; IDs, you
-     can use the &lt;address/&gt; element as described for host PCI devices in <xref linkend="sec.libvirt.config.pci.virsh"/>.
+       Instead of defining the host device with <tag class="emptytag">vendor</tag> and <tag class="emptytag">product</tag> IDs, you
+     can use the <tag class="emptytag">address</tag> element as described for host PCI devices in <xref linkend="sec.libvirt.config.pci.virsh"/>.
       </para>
      </tip>
     </step>
     <step>
      <para>
-      Shut down the VM Guest and restart it to make the assigned USB device
+      Shut down the VM Guest and disable SELinux if it is running on the host.
       available.
      </para>
-     <tip>
-      <title>SELinux</title>
-      <para>
-       If you are running SELinux on your VM Host Server, you need to disable it
-       prior to starting the VM Guest with
-      </para>
-<screen><prompt>tux &gt; </prompt><command>setsebool -P virt_use_sysfs 1</command></screen>
-     </tip>
+     <screen><command>setsebool -P virt_use_sysfs 1</command></screen>
+    </step>
+    <step>
+      <para>Start your VM Guest to make the assigned PCI device available</para>
+      <screen><command>virsh start sles15</command></screen>
     </step>
    </procedure>
   </sect1>
