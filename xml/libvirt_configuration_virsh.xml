@@ -162,19 +162,26 @@ Product Name: Standard PC (Q35 + ICH9, 2009)</screen>
 </sect1>
 
 <sect1 xml:id="libvirt.cpu_virsh">
-<title>Changing CPU Configuration</title>
-<sect2 xml:id="libvirt.cpu_alloc_virsh">
-  <title>Configure the CPU allocation</title>
+  <title>Configuring CPU allocation</title>
   <para>
     The number of allocated CPUs is stored in the VM Guest's XML
-    configuration file in <filename>/etc/libvirt/qemu/</filename> in the tag type:
+    configuration file in <filename>/etc/libvirt/qemu/</filename> in the <tag class="attribute">vcpu</tag>element:
   </para>
   <screen>&lt;vcpu placement='static'&gt;1&lt;/vcpu&gt;</screen>
-  <para>In this example the VM Guest has only one allocated CPU.
+  <para>In this example, the VM guest has only one allocated CPU.
     The following prcedure shows how to change the number of allocated
-    CPUs for the VM Guest.
+    CPUs for the VM Guest:
   </para>
     <procedure>
+      <step>
+        <para>
+        Check whether your VM guest is inactive:
+        </para>
+        <screen><prompt>tux &gt; </prompt><command>sudo virsh list --inactive</command>
+Id    Name                           State
+----------------------------------------------------
+-     sles15                         shut off</screen>
+      </step>
     <step>
       <para>
       Edit the configuration for an existing VM Guest:</para>
@@ -210,14 +217,13 @@ CPU Affinity:   yy
       </screen>
     </step>
     </procedure>
-</sect2>
 </sect1>
 
 <sect1 xml:id="sec.libvirt.config.boot_menu.virsh">
   <title>Changing Boot Options</title>
   <para>
-  The boot menu of the VM Guest can be found in the tag type
-  <tag>os</tag> and usually looks like this:
+  The boot menu of the VM Guest can be found in the
+  <tag>os</tag> element and usually looks like this:
   </para>
   <screen>&lt;os&gt;
   &lt;type&gt;hvm&lt;/type&gt;
@@ -230,7 +236,7 @@ CPU Affinity:   yy
   &lt;bios useserial='yes' rebootTimeout='0'/&gt;
   &lt;/os&gt;</screen>
   <para>
-  In this example two devices are available, <tag class="attvalue">hd</tag> and <tag class="attvalue">cdrom</tag>.
+  In this example, two devices are available, <tag class="attvalue">hd</tag> and <tag class="attvalue">cdrom</tag>.
   It also represents the actual boot order, so the <tag class="attvalue">cdrom</tag> comes
   before the <tag class="attvalue">hd</tag>.
   </para>
@@ -252,10 +258,12 @@ CPU Affinity:   yy
         <para>
         Change the sequence of the bootable devices.
         </para>
-        <screen>...
-        &lt;boot dev='cdrom'/&gt;
-        &lt;boot dev='hd'/&gt;
-        ...</screen>
+        <screen>
+...
+&lt;boot dev='cdrom'/&gt;
+&lt;boot dev='hd'/&gt;
+...
+      </screen>
       </step>
       <step>
         <para>
@@ -267,11 +275,10 @@ CPU Affinity:   yy
   </sect2>
 
   <sect2 xml:id="sec.libvirt.config.directkernel.virsh">
-    <title>Direct Kernel Boot</title>
+    <title>Using Direct Kernel Boot</title>
     <para>
-    libvirt also supports booting from a kernel and initrd stored on the host.
-    The path to both files has to be set in the <tag>kernel</tag> and <tag>initrd</tag> tag.
-    Here is an example:
+    Direct Kernel Boot allows you to boot from a kernel and initrd stored on the host.
+    The path to both files has to be set in the <tag>kernel</tag> and <tag>initrd</tag> elements:
     </para>
     <screen>&lt;os&gt;
     ...
@@ -291,7 +298,7 @@ CPU Affinity:   yy
       </step>
       <step>
         <para>
-        Add a <tag>kernel</tag> element and the path to the kernel file on the host:
+        Add a <tag>kernel</tag> element inside the <tag>os</tag> element and the path to the kernel file on the host:
         </para>
         <screen>
 ...
