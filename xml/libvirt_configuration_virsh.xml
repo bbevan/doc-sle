@@ -671,8 +671,8 @@ Bus 001 Device 003: ID <emphasis role="bold">0557:2221</emphasis> ATEN Internati
      <para>
       In case the card is not detected, it is likely that the hardware
       virtualization support in the BIOS/EFI has not been enabled.
-      To check if Hardware Virtualization support is enabled, look at
-      the settings in the Hosts BIOS.
+      To check if hardware virtualization support is enabled, look at
+      the settings in the hosts BIOS.
      </para>
     </step>
     <step>
@@ -689,10 +689,6 @@ igb                   185649  0</screen>
     <step>
      <para>
       Skip the following step if the driver is already loaded.
-     </para>
-    </step>
-    <step>
-     <para>
       If the <xref linkend="vt.io.sriov"/> driver is not yet loaded, the
       non-<xref linkend="vt.io.sriov"/> driver needs to be removed first,
       before loading the new driver. Use <command>rmmod</command> to unload
@@ -711,8 +707,9 @@ igb                   185649  0</screen>
      <screen><prompt>tux &gt; </prompt><command>sudo /sbin/modprobe igb max_vfs=8</command></screen>
     </step>
     </procedure>
+    <remark>Unsure if the following procedure is really needed.</remark>
      <para>
-      Or load the driver via SYSFS:
+      As an alternative, you can also load the driver via SYSFS:
      </para>
     <procedure>
     <step>
@@ -846,8 +843,8 @@ Then save it as <filename>/etc/init.d/after.local</filename>.
       82576NS network card:
      </para>
 <screen><prompt>tux &gt; </prompt><command>sudo virsh nodedev-list | grep 0000_04_</command>
-pci_0000_04_00_0
-pci_0000_04_00_1
+<emphasis role="bold">pci_0000_04_00_0</emphasis>
+<emphasis role="bold">pci_0000_04_00_1</emphasis>
 pci_0000_04_10_0
 pci_0000_04_10_1
 pci_0000_04_10_2
@@ -863,7 +860,7 @@ pci_0000_04_11_3
 pci_0000_04_11_4
 pci_0000_04_11_5</screen>
      <para>
-      The first two entries represent the PFs, whereas the other entries
+      The first two entries represent the <emphasis role="bold">PFs</emphasis>, whereas the other entries
       represent the VFs.
      </para>
     </step>
@@ -932,7 +929,7 @@ pci_0000_04_11_5</screen>
        <para>
         VFs do not get a fixed MAC address; it changes every time the host
         reboots. When adding network devices the <quote>traditional</quote>
-        way with &lt;hostdev&gt;, it would require to reconfigure the
+        way with <tag>hostdev</tag>, it would require to reconfigure the
         VM Guest's network device after each reboot of the host, because of
         the MAC address change. To avoid this kind of problem, libvirt
         introduced the <tag class="attvalue">hostdev</tag> value,
@@ -1142,7 +1139,7 @@ pci_0000_04_11_5</screen>
         <screen>&prompt.user;<command>sudo virsh edit sles15</command></screen>
       </step>
       <step>
-        <para>Add a <tag>disk</tag> element together with the attributes <tag class="attvalue">type</tag> and
+        <para>Add a <tag>disk</tag> element inside the <tag>disk</tag> element together with the attributes <tag class="attvalue">type</tag> and
         <tag class="attvalue">device</tag>.</para>
         <screen>&lt;disk type='file' device='disk'&gt;</screen>
       </step>
@@ -1152,7 +1149,7 @@ pci_0000_04_11_5</screen>
       </step>
       <step>
         <para>Create a disk image, which will be used as a source for the new virtual disk device</para>
-        <screen><command>sudo qemu-img create -f qcow2 /var/lib/libvirt/images/sles15.qcow2 32G</command></screen>
+        <screen>&prompt.user;<command>sudo qemu-img create -f qcow2 /var/lib/libvirt/images/sles15.qcow2 32G</command></screen>
       </step>
       <step>
         <para>Add the path for the disk source:</para>
