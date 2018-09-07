@@ -218,7 +218,7 @@ MODALIAS=input:b0003v046DpC03Ee0110-e0,1,2,k110,111,112,r0,1,8,amlsfw</screen>
    the kernel adds to the event itself or any information that the kernel
    exports to <filename>sysfs</filename>. The rule can also request additional
    information from external programs. Events are matched against all rules
-   prodided in the directories <filename>/usr/lib/udev/rules.d/</filename>
+   provided in the directories <filename>/usr/lib/udev/rules.d/</filename>
    (for default rules) and <filename>/etc/udev/rules.d</filename>
    (system-specific configuration).
   </para>
